@@ -4,6 +4,7 @@ import { GlobalStyle } from "./styles/global"
 import { useState } from "react";
 import Modal from "react-modal"
 import { NewTransactionModal } from "./components/NewTransactionModal";
+import { TransactionProvider } from "./hooks/useTransactions";
 Modal.setAppElement("#root") //informa a #root por acessibilisdade avisa que a root não está visivelporque o Modal está acina
 
 
@@ -18,14 +19,14 @@ export function App() {
     setIsNewTransactionModalOpen(false)
   }
   return (
-    <>
-      <Header  onOpenNewTransactionModal={handleOpenNewTransactionModal}/>
+    <TransactionProvider>
+      <Header  onOpenNewTransactionModal={handleOpenNewTransactionModal} />
       <Dashboard />
       <NewTransactionModal 
         isOpen={isNewTransactionModalOpen}
         onRequestClose={handleCloseNewTransactionModal}
       />
       <GlobalStyle />         
-    </>
+    </TransactionProvider>
   );
 }
